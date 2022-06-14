@@ -2,12 +2,12 @@ package com.crud.democrud.ServicesTest;
 
 import com.crud.democrud.models.UsuarioModel;
 import com.crud.democrud.repositories.UsuarioRepository;
-import com.crud.democrud.services.UsuarioService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +32,18 @@ public class UsuarioServiceTest {
         Long idBuscado=1L;
         Optional<UsuarioModel> usuarioModelBuscado=usuarioRepository.findById(idBuscado);
         assertThat(usuarioModelBuscado.get().getId()).isEqualTo(idBuscado);
+    }
+
+    /**
+     * Test buscar usuario por email
+     * @author Juan David Rivera
+     * @Version 1.0.0
+     */
+    @Test
+    public void testBuscarPorEmail(){
+        String email = "juan@gmail.com";
+        ArrayList<UsuarioModel> usuarioModelEmailList = usuarioRepository.findEmail(email);
+        assertThat(usuarioModelEmailList.get(0).getEmail()).isEqualTo(email);
     }
 
     @Test
